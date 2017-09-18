@@ -42,9 +42,3 @@ services:
     build: ./agents/java-nodejs
     env_file: .env
     restart: always
-
-  teamcity-agent4:
-    build: ./agents/java-nodejs
-    env_file: .env
-    restart: always
-
