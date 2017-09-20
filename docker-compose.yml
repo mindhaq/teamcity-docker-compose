@@ -32,13 +32,19 @@ services:
     build: ./agents/java-nodejs
     env_file: .env
     restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   teamcity-agent2:
     build: ./agents/java-nodejs
     env_file: .env
     restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   teamcity-agent3:
     build: ./agents/java-nodejs
     env_file: .env
     restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
