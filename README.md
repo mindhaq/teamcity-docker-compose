@@ -1,6 +1,10 @@
 # teamcity-docker-compose
 Compose to create working [TeamCity](https://www.jetbrains.com/teamcity/) server with PostgreSQL and Agents
 
+![state](https://img.shields.io/badge/state-stable-brightgreen.svg)
+![ssl](https://img.shields.io/badge/SSL-OK-brightgreen.svg)
+![jdbc version](https://img.shields.io/badge/jdbc%20postgresql%20version-42.1.4-green.svg)
+
 **This configuration use only official images:**
 
 [teamcity server](https://hub.docker.com/r/jetbrains/teamcity-server/),
@@ -47,7 +51,7 @@ To add HTTPs nginx-proxy with Let's Encrypt certificates (see https://github.com
 
 If you don't need HTTPs support – remove `nginx`, `nginx-proxy` and `letsencrypt-nginx-proxy-companion` services from your docker-compose file
 
-## Building and setup
+## Build and setup
 
 Next, build the images:
 
@@ -56,7 +60,7 @@ cd teamcity-docker-compose
 docker-compose build
 ```
 
-Now you can Up the service and continue settings in Web Interface:
+Now you can start up the service and continue configuring settings in Web Interface:
 
 ```
 docker-compose up
@@ -73,7 +77,7 @@ Set PostgreSQL as database type and click «Refresh JDBC drivers»
 
 ![Alt text](raw/img/1.png?raw=true)
 
-Configurate DB connection:
+Configure DB connection:
 
 ![Alt text](raw/img/2.png?raw=true)
 
@@ -90,13 +94,44 @@ Scaling you workers (agents) supported as well. Just use `docker-compose scale` 
 ```
 docker-compose scale teamcity-agent=3
 ```
-**Keep in mind, currently, agents are stateless**
+**Keep in mind: currently, agents are stateless**
 
 
-## Backups / restore
+## Backup / restore
 
 You may use JetBrains way to [backup](https://confluence.jetbrains.com/display/TCD10/TeamCity+Data+Backup) 
 or [restore](https://confluence.jetbrains.com/display/TCD10/Restoring+TeamCity+Data+from+Backup) your server
+
+
+## Update
+
+If you see a notice that a new version is available, you may update your TeamCity that way:
+
+```
+# build new version
+docker-compose build --pull --no-cache
+
+# stop and remove old containers
+docker-compose stop
+docker-compose rm
+
+# create and up new containers
+docker-compose up -d
+```
+
+After an update, you need to reauthorize your agents.
+
+### Updating maintenance
+
+Sometimes, during update you may get «maintenance is required» message instead of login page. 
+It's ok! To login in a maintenance mode you need to enter an authentication token. You may find it in the logs:
+`docker-compose logs -f`
+
+Try to find something like this:
+
+```
+teamcity-server_1                    | [TeamCity] Administrator can login from web UI using authentication token: 8755994969038184734
+```
 
 ## Platform-specific agents
 
@@ -114,8 +149,11 @@ docker-compose -f tc-django-nodejs-agent.yml up
 docker-compose -f tc-django-nodejs-agent.yml scale teamcity-django-agent=3
 ```
 
+### Ruby / Bundle
+
+Agent [info](agents/bundler-ruby/README.md)
 
 ## Contributing
 
-Bug reports, bug fixes, and new features are always welcome.
-Please open issues, and submit pull requests for any new code.
+Bug reports, bug fixes and new features are always welcome.
+Please open issues and submit pull requests for any new code.
