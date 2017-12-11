@@ -15,8 +15,8 @@ RUN apt-get install -y openjdk-8-jdk
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
-ENV NODE_VERSION 8.6.0
-ENV YARN_VERSION 1.1.0
+ENV NODE_VERSION 8.9.3
+ENV YARN_VERSION 1.3.2
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
