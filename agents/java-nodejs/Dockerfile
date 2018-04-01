@@ -11,12 +11,12 @@ ENV LANG=de_DE.UTF-8
 ENV LC_ALL=de_DE.UTF-8
 ENV TZ=Europe/Berlin
 
-RUN apt-get install -y openjdk-8-jdk
+RUN apt-get install -y openjdk-9-jdk-headless
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
-ENV NODE_VERSION 8.9.3
-ENV YARN_VERSION 1.3.2
+ENV NODE_VERSION 8.9.4
+ENV YARN_VERSION 1.5.1
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
