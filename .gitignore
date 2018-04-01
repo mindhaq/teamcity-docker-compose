@@ -1,3 +1,4 @@
 # My secret ENVs
 .env
 *.iml
+.idea
