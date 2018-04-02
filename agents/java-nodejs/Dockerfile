@@ -11,7 +11,7 @@ ENV LANG=de_DE.UTF-8
 ENV LC_ALL=de_DE.UTF-8
 ENV TZ=Europe/Berlin
 
-RUN apt-get install -y openjdk-9-jdk-headless
+RUN apt-get install -y openjdk-9-jdk
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
