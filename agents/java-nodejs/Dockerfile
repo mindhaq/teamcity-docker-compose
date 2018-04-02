@@ -1,9 +1,9 @@
 FROM jetbrains/teamcity-minimal-agent:latest
 LABEL description="TeamCity build agent for Java9 and nodejs8 applications"
 
-# Install Python stuff
+# Install system utilites
 RUN apt-get update && apt-get install -y \
-    curl wget locales xz-utils git gnupg2
+    curl wget locales xz-utils git gnupg2 python-software-properties software-properties-common debconf-utils apt-utils
 
 # Set the locale
 RUN locale-gen de_DE.UTF-8
@@ -11,10 +11,12 @@ ENV LANG=de_DE.UTF-8
 ENV LC_ALL=de_DE.UTF-8
 ENV TZ=Europe/Berlin
 
+# install JDK
 #RUN apt-get install -y openjdk-9-jdk
 RUN add-apt-repository ppa:webupd8team/java
 RUN apt-get update
-RUN apt-get install oracle-java9-installer
+RUN echo "oracle-java9-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+RUN apt-get install -y oracle-java9-installer
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
