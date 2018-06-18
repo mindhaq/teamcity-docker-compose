@@ -3,7 +3,7 @@ LABEL description="TeamCity build agent for Java9 and nodejs8 applications"
 
 # Install system utilites
 RUN apt-get update && apt-get install -y \
-    curl wget locales xz-utils git gnupg2 python-software-properties software-properties-common debconf-utils apt-utils
+    curl wget locales xz-utils git gnupg2 python-software-properties software-properties-common debconf-utils apt-utils git-flow
 
 # Set the locale
 RUN locale-gen de_DE.UTF-8
@@ -20,8 +20,8 @@ RUN apt-get install -y oracle-java9-installer
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
-ENV NODE_VERSION 8.11.1
-ENV YARN_VERSION 1.5.1
+ENV NODE_VERSION 8.11.3
+ENV YARN_VERSION 1.7.0
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
