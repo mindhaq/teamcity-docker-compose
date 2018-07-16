@@ -15,7 +15,7 @@ ENV TZ=Europe/Berlin
 #RUN apt-get install -y openjdk-9-jdk
 RUN add-apt-repository ppa:linuxuprising/java
 RUN apt-get update
-#RUN echo "oracle-java9-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+RUN echo "oracle-java10-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
 RUN apt-get install -y oracle-java10-installer
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
