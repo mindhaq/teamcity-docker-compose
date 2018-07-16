@@ -1,5 +1,5 @@
 FROM jetbrains/teamcity-minimal-agent:latest
-LABEL description="TeamCity build agent for Java9 and nodejs8 applications"
+LABEL description="TeamCity build agent for Java10 and nodejs8 applications"
 
 # Install system utilites
 RUN apt-get update && apt-get install -y \
@@ -13,10 +13,10 @@ ENV TZ=Europe/Berlin
 
 # install JDK
 #RUN apt-get install -y openjdk-9-jdk
-RUN add-apt-repository ppa:webupd8team/java
+RUN add-apt-repository ppa:linuxuprising/java
 RUN apt-get update
-RUN echo "oracle-java9-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
-RUN apt-get install -y oracle-java9-installer
+#RUN echo "oracle-java9-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+RUN apt-get install -y oracle-java10-installer
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
@@ -79,9 +79,5 @@ RUN set -ex \
 
 # more node build tools
 RUN npm -g install grunt-cli
-
-# ruby compass setup
-RUN apt-get -y install ruby ruby-dev libgmp-dev ruby-compass rubygems-integration rubygems
-RUN gem install compass
 
 RUN apt-get -y install docker.io
