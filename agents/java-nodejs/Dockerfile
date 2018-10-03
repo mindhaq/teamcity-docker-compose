@@ -12,16 +12,14 @@ ENV LC_ALL=de_DE.UTF-8
 ENV TZ=Europe/Berlin
 
 # install JDK
-#RUN apt-get install -y openjdk-9-jdk
-RUN add-apt-repository ppa:linuxuprising/java
+RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
-RUN echo "oracle-java10-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
-RUN apt-get install -y oracle-java10-installer
+RUN apt-get install -y openjdk-11-jdk-headless
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
-ENV NODE_VERSION 8.11.3
-ENV YARN_VERSION 1.7.0
+ENV NODE_VERSION 8.12.0
+ENV YARN_VERSION 1.10.1
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
