@@ -78,4 +78,8 @@ RUN set -ex \
 # more node build tools
 RUN npm -g install grunt-cli
 
+# ruby compass setup
+RUN apt-get -y install ruby ruby-dev libgmp-dev ruby-compass rubygems-integration rubygems
+RUN gem install compass
+
 RUN apt-get -y install docker.io
