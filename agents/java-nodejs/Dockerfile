@@ -1,9 +1,9 @@
 FROM jetbrains/teamcity-minimal-agent:latest
-LABEL description="TeamCity build agent for Java10 and nodejs8 applications"
+LABEL description="TeamCity build agent for Java11 and nodejs8 applications"
 
 # Install system utilites
 RUN apt-get update && apt-get install -y \
-    curl wget locales xz-utils git gnupg2 python-software-properties software-properties-common debconf-utils apt-utils git-flow
+    curl wget locales xz-utils git gnupg2 debconf-utils software-properties-common apt-utils git-flow
 
 # Set the locale
 RUN locale-gen de_DE.UTF-8
@@ -18,8 +18,8 @@ RUN apt-get install -y openjdk-11-jdk-headless
 
 # nodejs installation copied from https://github.com/nodejs/docker-node/
 
-ENV NODE_VERSION 8.12.0
-ENV YARN_VERSION 1.10.1
+ENV NODE_VERSION 10.15.3
+ENV YARN_VERSION 1.15.2
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
